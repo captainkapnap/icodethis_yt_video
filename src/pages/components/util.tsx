@@ -63,15 +63,15 @@ function ICodeThis() {
         <>
       <div id="div2toggle" className="flex dark">
         <nav className="bg-slate-900 text-white rounded-xl shadow-2xl p-6 dark:w-48 relative">
-            <button onClick={toggleDark} className="absolute -right-8 top-4 bg-slate-900 rounded-r p-1">
-                <svg xmlns="http://www.w3.org/2000/svg" className="dark:hidden" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <button onClick={toggleDark} className="absolute -right-6 top-4 bg-slate-900 rounded-r p-1">
+                <svg xmlns="http://www.w3.org/2000/svg" className="dark:hidden" width="18" height="18" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                     <path d="M20 12l-10 0"></path>
                     <path d="M20 12l-4 4"></path>
                     <path d="M20 12l-4 -4"></path>
                     <path d="M4 4l0 16"></path>
                 </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" className="hidden dark:block" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" className="hidden dark:block" width="18" height="18" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                     <path d="M4 12l10 0"></path>
                     <path d="M4 12l4 4"></path>
