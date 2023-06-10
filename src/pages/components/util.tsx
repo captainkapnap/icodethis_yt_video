@@ -57,7 +57,12 @@ function ICodeThis() {
        })
     
     return (
-      <div className="">
+      <div id="bodyDiv" className="bg-white flex justify-center items-center min-h-screen">
+        <div className="bg-slate-900 p-8 space-y-6 shadow-lg rounded max-w-full md:max-w-80">
+            <h1 className="text-center font-bold text-4xl text-white">Untercom
+                <span className="bg-blue-900 text-white text-xl ml-2 rounded p-1">APP</span>
+            </h1>
+        </div>
 
       </div>
     )
