@@ -61,9 +61,28 @@ function ICodeThis() {
     
     return (
       <div id="toggleDarkDiv" className="dark">
-        <div id="bodyDiv" className="">
+        <div id="bodyDiv" className="bg-slate-900 w-full min-h-screen flex justify-center items-center">
   
-            <div className="">
+            <div className="bg-slate-700 w-80 h-72 flex">
+                <section className='bg-slate-800 h-16 w-full relative'>
+                    <h1 className='text-slate-300 font-semibold p-4 pl-8'>Edit Your Account</h1>
+                    <button className='absolute top-4 right-4 hover:text-slate-100 text-slate-500'>
+                        <svg xmlns="http://www.w3.org/2000/svg" className='' width="17" height="17" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M18 6l-12 12"></path>
+                            <path d="M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </section>
+
+                <section className='bg-slate-400 p-50'>
+                    Test
+                </section>
+
+                <section>
+
+                </section>
+
 
             </div>
         </div>
