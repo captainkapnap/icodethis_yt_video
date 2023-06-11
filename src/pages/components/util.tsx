@@ -172,7 +172,7 @@ function ICodeThis() {
 
                 <div id='slider' className='flex w-full relative h-96 overflow-hidden p-2' style={{ }}>
                 {images.map((image, idx) => (
-                    <div className='w-96 h-full absolute transition' key={image} style={{left: `${idx * (IMG_WIDTH + IMG_GAP)}px`, transform: `translateX(${activeSlideIdx * (IMG_WIDTH + IMG_GAP)}px`}}>
+                    <div className='w-96 h-full absolute transition-transform' key={image} style={{left: `${idx * (IMG_WIDTH + IMG_GAP)}px`, transform: `translateX(${activeSlideIdx * (IMG_WIDTH + IMG_GAP)}px`}}>
                         <img className="w-96 h-72 object-cover" src={image} alt="Unsplash Image" />
                         <div>
                             <h1 className="text-4xl font-bold my-4">Title</h1>
