@@ -10,8 +10,11 @@ const ClientOnlyComponent = dynamic(() => import('./client-only'), {
 })
 
 // lazy loading of 'document' needs this validator if statement
-if (typeof window !== 'undefined') {
-
+function toggleDarkBtn() {
+    if (typeof window !== 'undefined') {
+        const toggleDiv = document.getElementById('toggleDarkDiv')
+        toggleDiv?.classList.toggle('dark')
+    }
 }
 // _____________________________________________________
 
@@ -57,9 +60,15 @@ function ICodeThis() {
        })
     
     return (
-      <div className="">
+      <div id="toggleDarkDiv" className="dark">
+        <div id="bodyDiv" className="">
+  
+            <div className="">
 
+            </div>
+        </div>
       </div>
+
     )
 }
 
