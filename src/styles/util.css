@@ -1,0 +1,56 @@
+/* This actually works but the yt tutorial uses a different method */
+/* // ******************************************************
+/* #bodyDiv {
+    background-image: linear-gradient(to right, white, white 50%, orange 50%);
+    background-size: 200%;
+    transition: background 250ms linear;
+}
+
+#toggleDarkDiv.dark #bodyDiv {
+    background-position: -100%;
+} */
+
+#bodyDiv::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgb(15 23 32);
+    width: 100%;
+    height: 100%;
+    transition: transform 300ms linear;
+    transform: translateX(-100%);
+    z-index: -1;
+
+}
+
+#toggleDarkDiv.dark #bodyDiv::after {
+    transform: translateX(0%);
+}
+
+.special {
+    background: rgb(15 23 32);
+    position: relative;
+}
+
+.special > * {
+    position: relative;
+    z-index: 2;
+}
+
+.special::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: white;
+    width: 100%;
+    height: 100%;
+    transition: transform 150ms linear;
+    transition-delay: 75ms;
+    transform: translateX(-100%);
+    z-index: 1;
+
+}
+
+#toggleDarkDiv.dark .special::after {
+    transform: translateX(0%);
+}

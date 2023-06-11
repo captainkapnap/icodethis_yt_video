@@ -61,15 +61,15 @@ function ICodeThis() {
     
     return (
       <div id="toggleDarkDiv" className="dark">
-      <div id="bodyDiv" className="bg-white dark:bg-slate-800 flex justify-center items-center min-h-screen transition">
-        <div className="bg-slate-900 transition dark:bg-white space-y-6 shadow-lg rounded-xl max-w-full w-80 md:max-w-80 text-white">
+      <div id="bodyDiv" className="flex justify-center items-center min-h-screen transition">
+        <div className="special bg-slate-900 transition space-y-6 shadow-lg rounded-xl max-w-full w-80 md:max-w-80 text-white overflow-hidden">
             <section className="bg-blue-500 p-8 rounded-xl rounded-b-none text-center relative">
                 <button id='btnToggleDark' className='absolute top-4 right-4 hover:opacity-75 w-6 h-6 overflow-hidden' onClick={toggleDarkBtn}>
-                            <svg xmlns="http://www.w3.org/2000/svg" className="moon absolute top-0 left-0 transition dark:-translate-x-6 translate-x-0 duration-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="moon absolute top-0 left-0 transition dark:translate-x-6 -translate-x-0 duration-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                 <path d="M12 1.992a10 10 0 1 0 9.236 13.838c.341 -.82 -.476 -1.644 -1.298 -1.31a6.5 6.5 0 0 1 -6.864 -10.787l.077 -.08c.551 -.63 .113 -1.653 -.758 -1.653h-.266l-.068 -.006l-.06 -.002z" stroke-width="0" fill="currentColor"></path>
                             </svg> 
-                            <svg xmlns="http://www.w3.org/2000/svg" className="sun absolute top-0 left-0 transition translate-x-6 dark:translate-x-0 duration-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="sun absolute top-0 left-0 transition -translate-x-6 dark:translate-x-0 duration-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                 <path d="M14.828 14.828a4 4 0 1 0 -5.656 -5.656a4 4 0 0 0 5.656 5.656z"></path>
                                 <path d="M6.343 17.657l-1.414 1.414"></path>
@@ -98,7 +98,7 @@ function ICodeThis() {
                 <p>Convert your hottest leads</p>
             </section>
 
-            <section className='p-8 text-slate-300 transition dark:text-slate-600 text-center'>
+            <section className='p-8 text-slate-300 transition dark:text-slate-600 text-center delay-100'>
                 <ul className='space-y-4'>
                     <li className='hover:opacity-75'><a href="">About</a></li>
                     <li className='hover:opacity-75'><a href="">Settings</a></li>
