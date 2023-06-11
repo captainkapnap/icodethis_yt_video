@@ -61,9 +61,10 @@ function ICodeThis() {
     
     return (
       <div id="toggleDarkDiv" className="dark">
-        <div id="bodyDiv" className="bg-slate-900 w-full min-h-screen flex justify-center items-center">
+        <div id="bodyDiv" className="bg-slate-900 min-h-screen flex justify-center items-center">
   
-            <div className="bg-slate-700 w-80 h-72 flex">
+            <div className="bg-slate-800 w-80 h-72 flex flex-col">
+                
                 <section className='bg-slate-800 h-16 w-full relative'>
                     <h1 className='text-slate-300 font-semibold p-4 pl-8'>Edit Your Account</h1>
                     <button className='absolute top-4 right-4 hover:text-slate-100 text-slate-500'>
@@ -75,8 +76,21 @@ function ICodeThis() {
                     </button>
                 </section>
 
-                <section className='bg-slate-400 p-50'>
-                    Test
+                <section className='bg-slate-700 h-40'>
+                    <ul>
+                        <li>
+                            <p>NAME</p>
+                            <input className='' />
+                        </li>
+                        <li>
+                            <p>EMAIL</p>
+                            <input className='' />
+                        </li>
+                        <li>
+                            <p>DATE OF BIRTH</p> 
+                            <input className='inline' /><input className='inline' /><input className='' />
+                        </li>
+                    </ul>
                 </section>
 
                 <section>
