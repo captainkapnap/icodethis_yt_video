@@ -57,20 +57,18 @@ function generateColor() {
 
 
 function ICodeThis() {
-    useEffect(() => {
-       })
-    
+
     return (
       <div id="toggleDarkDiv" className="dark">
-        <div id="bodyDiv" className="bg-[#262747] min-h-screen flex justify-center items-center">
+        <div id="bodyDiv" className="bg-[#262747] min-h-screen flex justify-center items-center selection:bg-[#DDBBFF] selection:text-black">
   
-            <div className="bg-[#2F3056] w-80 h-96 flex flex-col" id="container">
+            <div className="bg-[#2F3056] w-80 h-[26rem] flex flex-col shadow-lg rounded-md" id="container">
                 {/*
                 // ****************************************************** 
                 // * HEADER
                 // ****************************************************** */}
                 <section className='h-16 w-full relative'>
-                    <h1 className='text-slate-300 font-semibold p-4 pl-8'>Edit Your Account</h1>
+                    <h1 className='text-slate-300 font-semibold p-4 pl-8 text-xl'>Edit Your Account</h1>
                     <button className='absolute top-4 right-4 hover:text-slate-100 text-slate-500'>
                         <svg xmlns="http://www.w3.org/2000/svg" className='' width="17" height="17" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -83,28 +81,30 @@ function ICodeThis() {
                 // ******************************************************
                 // * FORM
                 // ****************************************************** */}
-                <section className='bg-slate-700 h-60'>
+                <section className='bg-[#4d509843] h-68'>
                     <form className='px-8 py-4' id='form'>
-                        <div className='' id='form-control'>
-                            <label>NAME</label>
-                            <input className='' id="username" />
-                            <IcT icons='checks' />
-                            <IcT icons='x' />
+                        <div className='relative ' id='form-control'>
+                            <label className='text-zinc-300 inline-block mb-1 font-semibold'>NAME</label>
+                            <input className='border-slate-500 border-2 bg-[#4d509843] rounded-sm block py-1 pl-2 w-full hover:bg-[#4d50988b] focus:border-purple-700 focus:border-2 outline-none text-zinc-300 font-semibold' id="username" placeholder="Enter Name"/>
+                            <IcT icons='checks' classNameCustom='absolute top-9 right-1 text-green-300 pr-1' />
+                            <IcT icons='x' classNameCustom='absolute top-9 right-1 text-red-600 pr-1' />
+                            <small className='text-red-600 font-semibold px-2'>Error Message</small>
+                        </div>
+                        <div className='relative' id='form-control'>
+                            <label className='text-zinc-300 inline-block mb-1 font-semibold'>EMAIL</label>
+                            <input className='border-slate-500 border-2 bg-[#4d509843] rounded-sm block py-1 pl-2 w-full hover:bg-[#4d50988b] focus:border-purple-700 focus:border-2 outline-none text-zinc-300 font-semibold' id="email" placeholder="Enter Email" />
+                            <IcT icons='checks' classNameCustom='absolute top-9 right-1 text-green-300 pr-1' />
+                            <IcT icons='x' classNameCustom='absolute top-9 right-1 text-red-600 pr-1' />
                             <small>Error Message</small>
                         </div>
-                        <div className='' id='form-control'>
-                            <label>EMAIL</label>
-                            <input className='' id="email" />
-                            <IcT icons='checks' />
-                            <IcT icons='x' />
-                            <small>Error Message2</small>
-                        </div>
-                        <div className='' id='form-control'>
-                            <label>DATE OF BIRTH</label>
-                            <input className='inline' /><input className='inline' /><input className='' />
-                            <IcT icons='checks' />
-                            <IcT icons='x' />
-                            <small>Error Message</small>
+                        <div className='relative' id='form-control'>
+                            <label className='text-zinc-300 block mb-1 font-semibold'>DATE OF BIRTH</label>
+                            <input className='border-slate-500 border-2 bg-[#4d509843] rounded-sm inline-block py-1 pl-2 w-1/4 hover:bg-[#4d50988b] focus:border-purple-700 focus:border-2 outline-none text-zinc-300 font-semibold' placeholder="Day"/>
+                            <input className='border-slate-500 border-2 bg-[#4d509843] rounded-sm inline-block py-1 pl-2 w-1/4 hover:bg-[#4d50988b] focus:border-purple-700 focus:border-2 outline-none text-zinc-300 font-semibold' placeholder="Month" />
+                            <input className='border-slate-500 border-2 bg-[#4d509843] rounded-sm inline-block py-1 pl-2 w-1/2 hover:bg-[#4d50988b] focus:border-purple-700 focus:border-2 outline-none text-zinc-300 font-semibold' placeholder="Year" />
+                            <IcT icons='checks' classNameCustom='absolute top-9 right-1 text-green-300 pr-1' />
+                            <IcT icons='x' classNameCustom='absolute top-9 right-1 text-red-600 pr-1' />
+                            <small className='block'>Error Message</small>
                         </div>
                     </form>
                 </section>
@@ -113,7 +113,8 @@ function ICodeThis() {
                 // * BUTTONS
                 // ****************************************************** */}
                 <section>
-
+                    <button className='px-6 py-1 border-2 border-purple-800 bg-slate-800 rounded-lg text-zinc-300'>Cancel</button>
+                    <button>Submit</button>
                 </section>
 
 
