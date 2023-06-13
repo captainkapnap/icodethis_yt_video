@@ -97,7 +97,7 @@ function ICodeThis() {
                             <input className='' id="email" />
                             <IcT icons='checks' />
                             <IcT icons='x' />
-                            <small>Error Message</small>
+                            <small>Error Message2</small>
                         </div>
                         <div className='' id='form-control'>
                             <label>DATE OF BIRTH</label>
