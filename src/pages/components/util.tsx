@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { any } from 'zod';
+import IcT from './icons';
 
 // ******************************************************
 // * Lazy Loading for client side document method.
@@ -61,11 +62,14 @@ function ICodeThis() {
     
     return (
       <div id="toggleDarkDiv" className="dark">
-        <div id="bodyDiv" className="bg-slate-900 min-h-screen flex justify-center items-center">
+        <div id="bodyDiv" className="bg-[#262747] min-h-screen flex justify-center items-center">
   
-            <div className="bg-slate-800 w-80 h-72 flex flex-col">
-                
-                <section className='bg-slate-800 h-16 w-full relative'>
+            <div className="bg-[#2F3056] w-80 h-96 flex flex-col" id="container">
+                {/*
+                // ****************************************************** 
+                // * HEADER
+                // ****************************************************** */}
+                <section className='h-16 w-full relative'>
                     <h1 className='text-slate-300 font-semibold p-4 pl-8'>Edit Your Account</h1>
                     <button className='absolute top-4 right-4 hover:text-slate-100 text-slate-500'>
                         <svg xmlns="http://www.w3.org/2000/svg" className='' width="17" height="17" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
@@ -75,24 +79,39 @@ function ICodeThis() {
                         </svg>
                     </button>
                 </section>
-
-                <section className='bg-slate-700 h-40'>
-                    <ul>
-                        <li>
-                            <p>NAME</p>
-                            <input className='' />
-                        </li>
-                        <li>
-                            <p>EMAIL</p>
-                            <input className='' />
-                        </li>
-                        <li>
-                            <p>DATE OF BIRTH</p> 
+                {/* 
+                // ******************************************************
+                // * FORM
+                // ****************************************************** */}
+                <section className='bg-slate-700 h-60'>
+                    <form className='px-8 py-4' id='form'>
+                        <div className='' id='form-control'>
+                            <label>NAME</label>
+                            <input className='' id="username" />
+                            <IcT icons='checks' />
+                            <IcT icons='x' />
+                            <small>Error Message</small>
+                        </div>
+                        <div className='' id='form-control'>
+                            <label>EMAIL</label>
+                            <input className='' id="email" />
+                            <IcT icons='checks' />
+                            <IcT icons='x' />
+                            <small>Error Message</small>
+                        </div>
+                        <div className='' id='form-control'>
+                            <label>DATE OF BIRTH</label>
                             <input className='inline' /><input className='inline' /><input className='' />
-                        </li>
-                    </ul>
+                            <IcT icons='checks' />
+                            <IcT icons='x' />
+                            <small>Error Message</small>
+                        </div>
+                    </form>
                 </section>
-
+                {/* 
+                // ******************************************************
+                // * BUTTONS
+                // ****************************************************** */}
                 <section>
 
                 </section>
