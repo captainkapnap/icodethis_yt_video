@@ -8,7 +8,6 @@ import { any } from 'zod';
 const ClientOnlyComponent = dynamic(() => import('./client-only'), {
     ssr: false,
 })
-
 // lazy loading of 'document' needs this validator if statement
 function toggleDarkBtn() {
     if (typeof window !== 'undefined') {
@@ -20,7 +19,6 @@ function toggleDarkBtn() {
 
 // *************************************************
 // * Copy text to clip board
-// *************************************************
 async function copyToClipboard(text: any) {
     try {
         await navigator.clipboard.writeText(text);
@@ -42,7 +40,6 @@ async function copyToClipboard(text: any) {
 
 // ******************************************************
 // * Generate a random HEX color 
-// ******************************************************
 function generateColor() {
     const hexArray = ['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f']
     let color ='#';
