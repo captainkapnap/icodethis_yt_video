@@ -2,6 +2,7 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import ICodeThis from './components/util';
+import IcT from "./components/icons";
 
 
 const Home: NextPage = () => {
