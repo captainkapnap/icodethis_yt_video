@@ -59,7 +59,7 @@ function ICodeThis() {
 
     // ================ HELPERS ================
 
-    
+
     // ================ LIFECYCLE ================
     useEffect(() => {
        })
@@ -67,7 +67,7 @@ function ICodeThis() {
     // ================ RETURN ================
     return (
       <div id="toggleDarkDiv" className="dark">
-        <div id="bodyDiv" className="">
+        <div id="bodyDiv" className="bg-[#08125d] w-full">
   
             <div className="">
 
