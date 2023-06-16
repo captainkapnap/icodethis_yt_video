@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { any } from 'zod';
 
+
 // ******************************************************
 // * Lazy Loading for client side document method.
 // ******************************************************
@@ -53,9 +54,17 @@ function generateColor() {
 
 
 function ICodeThis() {
+    // ================ STATE ================
+
+
+    // ================ HELPERS ================
+
+    
+    // ================ LIFECYCLE ================
     useEffect(() => {
        })
-    
+
+    // ================ RETURN ================
     return (
       <div id="toggleDarkDiv" className="dark">
         <div id="bodyDiv" className="">
