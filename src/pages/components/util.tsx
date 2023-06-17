@@ -92,8 +92,23 @@ function ICodeThis() {
     const [formValues, setFormValues] = useState<FormTypes>(initialConditions);
     const [formErrors, setFormErrors] = useState<FormErrors | null>(null);  // the | null allows for an initial state where there are no errors
     const [isSubmit, setIsSubmit] = useState<boolean>(false);
+    const [inputValid, setInputValid] = useState<Record<string, boolean>> ({
+        username: false,
+        email: false,
+        day: false,
+        month: false,
+        year: false,
+    })
 
-    const formControlRef = useRef<HTMLDivElement>(null);
+    // ******************************************************
+    // Don't need this but interesting concept
+    const formControlRef = {
+        username: useRef<HTMLInputElement>(null),
+        email: useRef<HTMLInputElement>(null),
+        day: useRef<HTMLInputElement>(null),
+        month: useRef<HTMLInputElement>(null),
+        year: useRef<HTMLInputElement>(null),
+    }
 
     // ================ HELPERS ================
     function handleChange(el: ChangeEvent<HTMLInputElement>) {
@@ -110,6 +125,12 @@ function ICodeThis() {
         }
 
         setFormValues({...formValues, [id]: parsedValue})
+        setFormErrors(validate({...formValues, [id]: parsedValue}))
+
+        setInputValid((prevValidity) => ({
+            ...prevValidity,
+            [id]: formErrors?.[id] === null || formErrors?.[id] === '',
+        }))
     }
 
     function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -183,15 +204,19 @@ function ICodeThis() {
         if (remainingErrors.length === 0 && isSubmit){
             console.log("*** SUBMITTED SUCCESSFULLY WITH: ", formValues)
         }
-    }, [formErrors, isSubmit])
+    // }, [formErrors, isSubmit])
+    }, [isSubmit])
 
+    useEffect(() => {
+        
+    }, [formValues])
 
     // ================ RETURN ================
     return (
       <div id="toggleDarkDiv" className="dark">
         <div id="bodyDiv" className="bg-[#262747] min-h-screen flex justify-center items-center selection:bg-[#DDBBFF] selection:text-black">
   
-            <div ref={formControlRef} className="bg-[#2F3056] w-80 h-[26rem] flex flex-col shadow-lg rounded-md" id="container">
+            <div className="bg-[#2F3056] w-80 h-[26rem] flex flex-col shadow-lg rounded-md" id="container">
                 {/*
                 // ****************************************************** 
                 // * HEADER
@@ -214,25 +239,25 @@ function ICodeThis() {
                     <form onSubmit={handleSubmit} className='px-8 py-4' id='form'>
                         <div className='relative pb-6 ' id='form-control'>
                             <label className='text-zinc-300 inline-block mb-1 font-semibold'>NAME</label>
-                            <input value={formValues.username} onChange={handleChange} className='border-slate-500 border-2 bg-[#4d509843] rounded-sm block py-1 pl-2 w-full hover:bg-[#4d50988b] focus:border-purple-700 focus:border-2 outline-none text-zinc-300 font-semibold' id="username" placeholder="Enter Name"/>
-                            <IcT icons='checks' classNameCustom='hidden absolute top-9 right-1 text-green-300 pr-1' />
-                            <IcT icons='x' classNameCustom='hidden absolute top-9 right-1 text-red-600 pr-1' />
+                            <input ref={formControlRef.username} value={formValues.username} onChange={handleChange} className='border-slate-500 border-2 bg-[#4d509843] rounded-sm block py-1 pl-2 w-full hover:bg-[#4d50988b] focus:border-purple-700 focus:border-2 outline-none text-zinc-300 font-semibold' id="username" placeholder="Enter Name"/>
+                            <IcT icons='checks' classNameCustom={inputValid.username ? 'absolute top-9 right-1 text-green-300 pr-1' : 'hidden'} />
+                            <IcT icons='x' classNameCustom={inputValid.username ? 'hidden' : 'absolute top-9 right-1 text-red-600 pr-1'} />
                             <small className='text-red-600 font-semibold absolute bottom-0 left-0 hidden'>Error Message</small>
                         </div>
                         <div className='relative pb-6' id='form-control'>
                             <label className='text-zinc-300 inline-block mb-1 font-semibold'>EMAIL</label>
-                            <input value={formValues.email} onChange={handleChange} className='border-slate-500 border-2 bg-[#4d509843] rounded-sm block py-1 pl-2 w-full hover:bg-[#4d50988b] focus:border-purple-700 focus:border-2 outline-none text-zinc-300 font-semibold' id="email" placeholder="Enter Email" />
-                            <IcT icons='checks' classNameCustom='hidden absolute top-9 right-1 text-green-300 pr-1' />
-                            <IcT icons='x' classNameCustom='hidden absolute top-9 right-1 text-red-600 pr-1' />
+                            <input ref={formControlRef.email} value={formValues.email} onChange={handleChange} className='border-slate-500 border-2 bg-[#4d509843] rounded-sm block py-1 pl-2 w-full hover:bg-[#4d50988b] focus:border-purple-700 focus:border-2 outline-none text-zinc-300 font-semibold' id="email" placeholder="Enter Email" />
+                            <IcT icons='checks' classNameCustom={inputValid.email ? 'absolute top-9 right-1 text-green-300 pr-1' : 'hidden'} />
+                            <IcT icons='x' classNameCustom={inputValid.email ? 'hidden' : 'absolute top-9 right-1 text-red-600 pr-1'} />
                             <small className='text-red-600 font-semibold absolute bottom-0 left-0 hidden'>Error Message</small>
                         </div>
                         <div className='relative pb-6' id='form-control'>
                             <label className='text-zinc-300 block mb-1 font-semibold'>DATE OF BIRTH</label>
-                            <input value={formValues.day || ''} onChange={handleChange} className='border-slate-500 border-2 bg-[#4d509843] rounded-sm inline-block py-1 pl-2 w-1/4 hover:bg-[#4d50988b] focus:border-purple-700 focus:border-2 outline-none text-zinc-300 font-semibold' id="day" placeholder="Day"/>
-                            <input value={formValues.month || ''} onChange={handleChange} className='border-slate-500 border-2 bg-[#4d509843] rounded-sm inline-block py-1 pl-2 w-1/4 hover:bg-[#4d50988b] focus:border-purple-700 focus:border-2 outline-none text-zinc-300 font-semibold' id="month" placeholder="Month" />
-                            <input value={formValues.year || ''} onChange={handleChange} className='border-slate-500 border-2 bg-[#4d509843] rounded-sm inline-block py-1 pl-2 w-1/2 hover:bg-[#4d50988b] focus:border-purple-700 focus:border-2 outline-none text-zinc-300 font-semibold' id="year" placeholder="Year" />
-                            <IcT icons='checks' classNameCustom='hidden absolute top-9 right-1 text-green-300 pr-1' />
-                            <IcT icons='x' classNameCustom='hidden absolute top-9 right-1 text-red-600 pr-1' />
+                            <input ref={formControlRef.day} value={formValues.day || ''} onChange={handleChange} className='border-slate-500 border-2 bg-[#4d509843] rounded-sm inline-block py-1 pl-2 w-1/4 hover:bg-[#4d50988b] focus:border-purple-700 focus:border-2 outline-none text-zinc-300 font-semibold' id="day" placeholder="Day"/>
+                            <input ref={formControlRef.month} value={formValues.month || ''} onChange={handleChange} className='border-slate-500 border-2 bg-[#4d509843] rounded-sm inline-block py-1 pl-2 w-1/4 hover:bg-[#4d50988b] focus:border-purple-700 focus:border-2 outline-none text-zinc-300 font-semibold' id="month" placeholder="Month" />
+                            <input ref={formControlRef.year} value={formValues.year || ''} onChange={handleChange} className='border-slate-500 border-2 bg-[#4d509843] rounded-sm inline-block py-1 pl-2 w-1/2 hover:bg-[#4d50988b] focus:border-purple-700 focus:border-2 outline-none text-zinc-300 font-semibold' id="year" placeholder="Year" />
+                            <IcT icons='checks' classNameCustom={inputValid.username ? 'absolute top-9 right-1 text-green-300 pr-1' : 'hidden'} />
+                            <IcT icons='x' classNameCustom={inputValid.username ? 'hidden' : 'absolute top-9 right-1 text-red-600 pr-1'} />
                             <small className='text-red-600 font-semibold absolute bottom-0 left-0 hidden'>Error Message</small>
                         </div>
                         {/* 
