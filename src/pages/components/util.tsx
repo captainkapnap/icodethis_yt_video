@@ -124,8 +124,11 @@ function ICodeThis() {
             }
         }
 
-        setFormValues({...formValues, [id]: parsedValue})
-        setFormErrors(validate({...formValues, [id]: parsedValue}))
+        setFormValues((prevValues) => {
+            const updatedValues = {...prevValues, [id]: parsedValue}
+            return updatedValues;
+        })  // all input text stored in formValues.[id]
+        setFormErrors(() => validate({...formValues, [id]: parsedValue}))
 
         setInputValid((prevValidity) => ({
             ...prevValidity,
@@ -208,7 +211,7 @@ function ICodeThis() {
     }, [isSubmit])
 
     useEffect(() => {
-        
+        console.log("useEffect: ", formValues)
     }, [formValues])
 
     // ================ RETURN ================
