@@ -1,6 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
-import { any } from 'zod';
+import { any, boolean } from 'zod';
+import IcT from './icons';
 
 
 // ******************************************************
@@ -55,10 +56,17 @@ function generateColor() {
 
 function ICodeThis() {
     // ================ STATE ================
+    const [upShowing, setUpShowing] = useState<boolean>(true);
 
 
     // ================ HELPERS ================
-
+    function handleChevronClick() {
+        if (upShowing) {
+            setUpShowing(false)
+        } else if (!upShowing) {
+            setUpShowing(true)
+        }
+    }
     
     // ================ LIFECYCLE ================
     useEffect(() => {
@@ -67,10 +75,26 @@ function ICodeThis() {
     // ================ RETURN ================
     return (
       <div id="toggleDarkDiv" className="dark">
-        <div id="bodyDiv" className="">
+        <div id="bodyDiv" className="bg-stone-300 min-h-screen flex justify-center items-center">
   
-            <div className="">
+            <div className="w-72 h-14 bg-stone-300 border-zinc-300 border-[1px] rounded-md drop-shadow shadow-lg" id="container">
+                <div className='w-1/5 bg-stone-300 h-full rounded-md justify-center flex items-center text-black hover:text-blue-600' id='arrow'>
+                    {upShowing ? (
+                        <button onClick={handleChevronClick}>
+                            <IcT icons="chevronUp" />
+                        </button>
+                    ) : (
+                        <button onClick={handleChevronClick}>
+                            <IcT icons="chevronDown" />
+                        </button>
+                    )}
+                </div>
+                <div className='' id='inputBox'>
 
+                </div>
+                <div className='' id='searchButton'>
+
+                </div>
             </div>
         </div>
       </div>
