@@ -210,9 +210,22 @@ function ICodeThis() {
     // }, [formErrors, isSubmit])
     }, [isSubmit])
 
-    useEffect(() => {
-        console.log("useEffect: ", formValues)
-    }, [formValues])
+    // ******************************************************
+    // * All sorts of fucked up here
+    // ******************************************************
+    // useEffect(() => {
+    //     setInputValid((prevValidity) => {
+    //         const newValidity: Record<string, boolean> = {};
+    //         console.log("preValidity: ", prevValidity)
+      
+    //         for (const key in prevValidity) {
+    //             // newValidity[key] = formValues[key as keyof FormTypes]?.toString().length > 0;
+    //             console.log("key: ", key)
+    //         }
+      
+    //         return newValidity;
+    //     });
+    // }, Object.values(formValues))
 
     // ================ RETURN ================
     return (
@@ -257,10 +270,16 @@ function ICodeThis() {
                         <div className='relative pb-6' id='form-control'>
                             <label className='text-zinc-300 block mb-1 font-semibold'>DATE OF BIRTH</label>
                             <input ref={formControlRef.day} value={formValues.day || ''} onChange={handleChange} className='border-slate-500 border-2 bg-[#4d509843] rounded-sm inline-block py-1 pl-2 w-1/4 hover:bg-[#4d50988b] focus:border-purple-700 focus:border-2 outline-none text-zinc-300 font-semibold' id="day" placeholder="Day"/>
+                            <IcT icons='checks' classNameCustom={inputValid.day ? 'absolute top-9 left-10 text-green-300 pr-1' : 'hidden'} />
+                            <IcT icons='x' classNameCustom={inputValid.day ? 'hidden' : 'absolute top-9 left-10 text-red-600 pr-1'} />
+
                             <input ref={formControlRef.month} value={formValues.month || ''} onChange={handleChange} className='border-slate-500 border-2 bg-[#4d509843] rounded-sm inline-block py-1 pl-2 w-1/4 hover:bg-[#4d50988b] focus:border-purple-700 focus:border-2 outline-none text-zinc-300 font-semibold' id="month" placeholder="Month" />
+                            <IcT icons='checks' classNameCustom={inputValid.month ? 'absolute top-9 left-[6.5rem] text-green-300 pr-1' : 'hidden'} />
+                            <IcT icons='x' classNameCustom={inputValid.month ? 'hidden' : 'absolute top-9 left-[6.5rem] text-red-600 pr-1'} />
+
                             <input ref={formControlRef.year} value={formValues.year || ''} onChange={handleChange} className='border-slate-500 border-2 bg-[#4d509843] rounded-sm inline-block py-1 pl-2 w-1/2 hover:bg-[#4d50988b] focus:border-purple-700 focus:border-2 outline-none text-zinc-300 font-semibold' id="year" placeholder="Year" />
-                            <IcT icons='checks' classNameCustom={inputValid.username ? 'absolute top-9 right-1 text-green-300 pr-1' : 'hidden'} />
-                            <IcT icons='x' classNameCustom={inputValid.username ? 'hidden' : 'absolute top-9 right-1 text-red-600 pr-1'} />
+                            <IcT icons='checks' classNameCustom={inputValid.year ? 'absolute top-9 right-1 text-green-300 pr-1' : 'hidden'} />
+                            <IcT icons='x' classNameCustom={inputValid.year ? 'hidden' : 'absolute top-9 right-1 text-red-600 pr-1'} />
                             <small className='text-red-600 font-semibold absolute bottom-0 left-0 hidden'>Error Message</small>
                         </div>
                         {/* 
