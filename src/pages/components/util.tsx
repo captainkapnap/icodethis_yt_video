@@ -75,10 +75,10 @@ function ICodeThis() {
     // ================ RETURN ================
     return (
       <div id="toggleDarkDiv" className="dark">
-        <div id="bodyDiv" className="bg-stone-300 min-h-screen flex justify-center items-center">
+        <div id="bodyDiv" className="bg-stone-200 min-h-screen flex justify-center items-center">
   
-            <div className="w-72 h-14 bg-stone-300 border-zinc-300 border-[1px] rounded-md drop-shadow shadow-lg" id="container">
-                <div className='w-1/5 bg-stone-300 h-full rounded-md justify-center flex items-center text-black hover:text-blue-600' id='arrow'>
+            <div className="w-80 h-14 bg-stone-200 border-zinc-300 border-[1px] rounded-md drop-shadow shadow-lg flex" id="container">
+                <div className='w-1/5 bg-stone-200 h-full rounded-md justify-center flex items-center text-black hover:text-blue-600' id='arrow'>
                     {upShowing ? (
                         <button onClick={handleChevronClick}>
                             <IcT icons="chevronUp" />
@@ -89,11 +89,13 @@ function ICodeThis() {
                         </button>
                     )}
                 </div>
-                <div className='' id='inputBox'>
-
+                <div className='w-3/5 p-1' id='inputBox'>
+                        <input className='h-full w-full outline-none px-2 text-lg shadow-sm rounded-sm border-slate-300 border focus:border-blue-300 focus:border' type="search" />
                 </div>
-                <div className='' id='searchButton'>
-
+                <div className='w-1/5 flex justify-center items-center' id='searchButton'>
+                        <button className=''>
+                            <IcT icons="search" />
+                        </button>
                 </div>
             </div>
         </div>
