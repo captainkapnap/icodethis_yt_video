@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+/* #imgProfilePic {
+  width: 32px;
+  height: 32px;
+} */
+
+.bg-image {
+    position: relative;
+}
+
+.custom-shape-divider-bottom-1687252303 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1687252303 svg {
+    position: relative;
+    display: block;
+    width: calc(210% + 1.3px);
+    height: 472px;
+    transform: rotateY(180deg);
+}
+
+.custom-shape-divider-bottom-1687252303 .shape-fill {
+    fill: #CA8A04;
+}
