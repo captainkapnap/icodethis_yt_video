@@ -5,6 +5,10 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms")(
+    {
+      strategy: 'class',
+    }
+  )],
   darkMode: 'class',
 } satisfies Config;
