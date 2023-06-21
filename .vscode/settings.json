@@ -1,0 +1,8 @@
+{
+    "replacerules.rules": {
+        "Replace Tabler": {
+          "find": ["stroke-width", "stroke-linecap", "stroke-linejoin"],
+          "replace": ["strokeWidth", "strokeLinecap", "strokeLinejoin"],
+        }
+      }
+}
