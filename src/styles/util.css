@@ -1,0 +1,10 @@
+  #playlists::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  #playlists::-webkit-scrollbar {
+    height: 0px;
+    width: 0px;
+  }
+  #playlists::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
