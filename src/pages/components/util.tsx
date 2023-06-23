@@ -56,12 +56,44 @@ function generateColor() {
 type ActiveMenu = 'Home' | 'Trending' | 'Browse' | 'Library' 
 type PlaylistsMenu = ['New Music' | 'Playlists' | 'Top Charts' | 'Genre'] | string[]
 type PromotedMusic = {artist: string, song: string, image: string, specialMsg: string | null, indexNum?: number | null}[];
+type SongList = {artist: string, song: string, profilePic: string}[];
 
 const listOfPromoted: PromotedMusic = [
     {artist: 'Nicki Minaj', song: 'Queen', image: 'https://www.rnbjunk.com/foto/2022/08/biografia-nicki-minaj-1200x675.jpg.webp', specialMsg: 'New Album'},
     {artist: 'Snoop Dogg', song: 'Gin and Juice', image: 'https://footwearnews.com/wp-content/uploads/2022/08/snoopdogg.jpg', specialMsg: 'Suprise Song'},
     {artist: 'Kanye West', song: 'College Dropouts', image: 'https://footwearnews.com/wp-content/uploads/2023/05/GettyImages-1254881113.jpg', specialMsg: 'New Album'},
+    {artist: 'Eminem', song: 'Lose Yourself', image: 'https://static.stereogum.com/uploads/2022/10/Eminem-Lose-Yourself-1666109360-520x5201-1666540295.jpeg', specialMsg: 'Best Seller'},
 ];
+
+const listOfSongs: SongList = [
+    {artist: 'Eminem', song: 'Lose Yourself', profilePic: 'https://static.stereogum.com/uploads/2022/10/Eminem-Lose-Yourself-1666109360-520x5201-1666540295.jpeg'},
+    {artist: 'Cardi B', song: 'I Like It', profilePic: 'https://footwearnews.com/wp-content/uploads/2020/11/cardi-b-reebok-08-1.jpg'},
+    {artist: 'Jay-Z', song: 'Dirt off your Shoulders', profilePic: 'https://footwearnews.com/wp-content/uploads/2023/02/blueivycarter.jpg'},
+    {artist: 'Beyonce', song: 'B Loves React and NextJS', profilePic: 'https://footwearnews.com/wp-content/uploads/2023/05/beyonce-renaissance-world-tour.jpg'},
+    {artist: 'Weeknd', song: 'Super Sad Song but Cool', profilePic: 'https://footwearnews.com/wp-content/uploads/2016/09/the-weeknd-starboy.jpg'},
+    {artist: 'Shania Twain', song: 'Go Girl', profilePic: 'https://footwearnews.com/wp-content/uploads/2023/02/shania-twain-brits-red-carpet-2.jpg'},
+    {artist: 'Kid Cudi', song: 'Galaxy Song', profilePic: 'https://footwearnews.com/wp-content/uploads/2021/04/kid-cudi-westworld-1.jpg'},
+]
+
+function SongCard({artist, song, profilePic}: SongList[number]) {
+
+    return (
+        <div className='w-full h-16 flex border-b border-slate-900'>
+            <div className="w-[30%] h-full flex justify-center items-center">
+                <img src={profilePic} alt={artist} className='rounded-full w-12 h-12 object-cover hover:scale-125 transition'/>
+            </div>
+            <div className="w-[60%] h-full flex flex-col justify-center text-stone-300">
+                <h1 className='text-sm font-semibold '>{song}</h1>
+                <small>{artist}</small>
+            </div>
+            <div className="w-[10%] h-full">
+                <button className='w-full h-full font-bold text-3xl text-red-500'>
+                    +
+                </button>
+            </div>
+        </div>
+    )
+}
 
 function PromotedMusicCards({artist, song, image, specialMsg, indexNum}: PromotedMusic[number]) {
     // const incIndex = indexNum === 0 || indexNum ? indexNum + 1 : undefined;
@@ -70,16 +102,16 @@ function PromotedMusicCards({artist, song, image, specialMsg, indexNum}: Promote
 
     return (
         <div className='w-[95%] flex flex-wrap h-full p-1 pl-2'>
-            <div className="w-[60%] h-[20%] lg:h-[10%]" id="song">
+            <div className="w-[60%] h-[20%] min-[320px]:h-[10%] mb-2" id="song">
                 <small className='font-semibold'>{song}</small>
             </div>
-            <div className="w-[40%] h-[20%] lg:h-[10%] flex flex-col items-center" id="specialMsg">
+            <div className="w-[40%] h-[20%] min-[320px]:h-[10%] flex flex-col items-center" id="specialMsg">
                 <button className='border border-red-600 drop-shadow-lg rounded-2xl text-xs px-1 py-0 mt-1 text-gray-400 hover:text-gray-300 hover:border-2'>{specialMsg}</button>
             </div>
-            <div className="w-full h-[20%] lg:h-[10%] lg:mb-2" id="artist">
+            <div className="w-full h-[20%] min-[320px]:h-[10%]  min-[320px]:mb-2" id="artist">
                 {artist}
             </div>
-            <div className="w-full h-[50%] lg:h-[70%]" id="image">
+            <div className="w-full h-[50%] min-[320px]:h-[70%]" id="image">
                 <img src={image} alt="image" className='w-full h-full object-cover object-top rounded-xl' />
             </div>
         </div>
@@ -98,9 +130,7 @@ function ICodeThis() {
     // ================ HELPERS ================
     function handlePlayList(selPlaylist: number): MouseEventHandler<HTMLAnchorElement> {
         setActivePlaylist(selPlaylist);
-
         return () => {
-            console.log(selPlaylist);
         }
     }
     
@@ -115,8 +145,6 @@ function ICodeThis() {
     useEffect(() => {
         const scrollContainerActiveMenu = scrollContainerActiveMenuRef.current;
         const scrollContainerPlaylist = scrollContainerPromotedRef.current;
-
-        console.log(scrollContainerPromotedRef.current?.id)
         
         const handleActiveMenuWheel = (e: WheelEvent) => {
             e.preventDefault();
@@ -168,14 +196,17 @@ function ICodeThis() {
                         </Link>
                     ))}
                 </div>
-                <div className=' w-full h-[35%] lg:h-[25%] flex flex-nowrap overflow-hidden' id="promotedMusic" style={{ scrollBehavior: 'smooth'}} ref={scrollContainerPromotedRef} >
+                <div className='w-full h-[35%] lg:h-[25%] flex flex-nowrap overflow-hidden' id="promotedMusic" style={{ scrollBehavior: 'smooth'}} ref={scrollContainerPromotedRef} >
                         {listOfPromoted.map((promotedSong, index: number) => (
                             <div className='w-[90%] flex-shrink-0' key={index}>
                                 <PromotedMusicCards artist={promotedSong.artist} song={promotedSong.song} image={promotedSong.image} specialMsg={promotedSong.specialMsg} indexNum={index} key={index} />
                             </div>
                         ))}
                 </div>
-                <div className='w-full h-[45%]' id="songList">
+                <div className='w-full h-[45%] overflow-y-auto' id="songList">
+                    {listOfSongs.map((songFromlist, index: number) => (
+                        <SongCard artist={songFromlist.artist} song={songFromlist.song} profilePic={songFromlist.profilePic} key={index} />
+                    ))}
 
                 </div>
                 <div className='w-full h-[10%] bg-slate-900 leading-tight' id="bottomMenu">

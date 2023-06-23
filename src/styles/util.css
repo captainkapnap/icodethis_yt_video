@@ -1,10 +1,13 @@
-  #playlists::-webkit-scrollbar-track {
+  #playlists::-webkit-scrollbar-track,
+  #songList::-webkit-scrollbar-track {
     background: transparent;
   }
-  #playlists::-webkit-scrollbar {
+  #playlists::-webkit-scrollbar, 
+  #songList::-webkit-scrollbar {
     height: 0px;
     width: 0px;
   }
-  #playlists::-webkit-scrollbar-thumb {
+  #playlists::-webkit-scrollbar-thumb, 
+  #songList::-webkit-scrollbar-thumb {
     background: transparent;
   }
