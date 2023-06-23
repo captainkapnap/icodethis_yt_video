@@ -106,7 +106,7 @@ function PromotedMusicCards({artist, song, image, specialMsg, indexNum}: Promote
                 <small className='font-semibold'>{song}</small>
             </div>
             <div className="w-[40%] h-[20%] min-[320px]:h-[10%] flex flex-col items-center" id="specialMsg">
-                <button className='border border-red-600 drop-shadow-lg rounded-2xl text-xs px-1 py-0 mt-1 text-gray-400 hover:text-gray-300 hover:border-2'>{specialMsg}</button>
+                <button className='border border-red-600 drop-shadow-lg rounded-2xl text-xs px-1 py-0 mt-1 text-gray-400 hover:text-gray-300 hover:bg-red-500'>{specialMsg}</button>
             </div>
             <div className="w-full h-[20%] min-[320px]:h-[10%]  min-[320px]:mb-2" id="artist">
                 {artist}
