@@ -1,4 +1,4 @@
-import { MouseEventHandler, useEffect, useState, useRef } from 'react';
+import { MouseEventHandler, useEffect, useState, useRef, useCallback } from 'react';
 import dynamic from 'next/dynamic';
 import { any } from 'zod';
 import Link from 'next/link';
@@ -55,32 +55,32 @@ function generateColor() {
 
 type ActiveMenu = 'Home' | 'Trending' | 'Browse' | 'Library' 
 type PlaylistsMenu = ['New Music' | 'Playlists' | 'Top Charts' | 'Genre'] | string[]
-type PromotedMusic = {artist: string, song: string, image: string, specialMsg: string | null}[];
+type PromotedMusic = {artist: string, song: string, image: string, specialMsg: string | null, indexNum?: number | null}[];
 
 const listOfPromoted: PromotedMusic = [
-    {artist: 'Nicki Minaj', song: 'Queen', image: 'https://footwearnews.com/wp-content/uploads/2021/11/MEGA73465_010.jpg', specialMsg: 'New Album'},
+    {artist: 'Nicki Minaj', song: 'Queen', image: 'https://www.rnbjunk.com/foto/2022/08/biografia-nicki-minaj-1200x675.jpg.webp', specialMsg: 'New Album'},
     {artist: 'Snoop Dogg', song: 'Gin and Juice', image: 'https://footwearnews.com/wp-content/uploads/2022/08/snoopdogg.jpg', specialMsg: 'Suprise Song'},
     {artist: 'Kanye West', song: 'College Dropouts', image: 'https://footwearnews.com/wp-content/uploads/2023/05/GettyImages-1254881113.jpg', specialMsg: 'New Album'},
 ];
 
-function PromotedMusicCards({artist, song, image, specialMsg}: PromotedMusic[number]) {
-
+function PromotedMusicCards({artist, song, image, specialMsg, indexNum}: PromotedMusic[number]) {
+    // const incIndex = indexNum === 0 || indexNum ? indexNum + 1 : undefined;
+    // const leftPosition: number | undefined = incIndex ? incIndex * 260 : undefined;
+    // <div className={`absolute top-0 ${leftPosition !== undefined ? `left-[${leftPosition}px]` : ''`}
 
     return (
-        <div className='w-[90%] h-full border border-blue-900'>
-            <div className='flex flex-wrap '>
-                <div className="w-[60%] h-[20%] border border-red-400" id="song">
-                    {song}
-                </div>
-                <div className="w-[30%] h-[20%] border border-red-400" id="specialMsg">
-                    {specialMsg}
-                </div>
-                <div className="w-[90%] h-[20%] border border-red-400" id="artist">
-                    {artist}
-                </div>
-                <div className="w-[90%] h-[50%] border border-red-400 rounded-xl" id="image">
-                    <img src={image} alt="image" className='w-full h-full object-cover' />
-                </div>
+        <div className='w-[95%] flex flex-wrap h-full p-1 pl-2'>
+            <div className="w-[60%] h-[20%] lg:h-[10%]" id="song">
+                <small className='font-semibold'>{song}</small>
+            </div>
+            <div className="w-[40%] h-[20%] lg:h-[10%] flex flex-col items-center" id="specialMsg">
+                <button className='border border-red-600 drop-shadow-lg rounded-2xl text-xs px-1 py-0 mt-1 text-gray-400 hover:text-gray-300 hover:border-2'>{specialMsg}</button>
+            </div>
+            <div className="w-full h-[20%] lg:h-[10%] lg:mb-2" id="artist">
+                {artist}
+            </div>
+            <div className="w-full h-[50%] lg:h-[70%]" id="image">
+                <img src={image} alt="image" className='w-full h-full object-cover object-top rounded-xl' />
             </div>
         </div>
     )
@@ -104,26 +104,45 @@ function ICodeThis() {
         }
     }
     
- 
+    function handleNav(props: ActiveMenu): MouseEventHandler<HTMLButtonElement> {
+        
+        return useCallback(() => {
+            setActiveMenu(props);
+        }, [props])
+    }
 
     // ================ LIFECYCLE ================
     useEffect(() => {
-        const scrollContainer = scrollContainerActiveMenuRef.current;
+        const scrollContainerActiveMenu = scrollContainerActiveMenuRef.current;
+        const scrollContainerPlaylist = scrollContainerPromotedRef.current;
 
-        const handleWheel = (e: WheelEvent) => {
+        console.log(scrollContainerPromotedRef.current?.id)
+        
+        const handleActiveMenuWheel = (e: WheelEvent) => {
             e.preventDefault();
-            if (scrollContainer) {
-                scrollContainer.scrollLeft += e.deltaY;
+            if (scrollContainerActiveMenu) {
+                scrollContainerActiveMenu.scrollLeft += e.deltaY/2;
             }
         }
+        const handlePromotedMusicWheel = (e: WheelEvent) => {
+            if (scrollContainerPlaylist) {
+                scrollContainerPlaylist.scrollLeft += e.deltaY;
+            }
+        }   
             
-        if (scrollContainer) {
-            scrollContainer.addEventListener('wheel', handleWheel);
+        if (scrollContainerActiveMenu) {
+            scrollContainerActiveMenu.addEventListener('wheel', handleActiveMenuWheel);
+        }
+        if (scrollContainerPlaylist) {
+            scrollContainerPlaylist.addEventListener('wheel', handlePromotedMusicWheel);
         }
 
         return () => {
-            if (scrollContainer) {
-                scrollContainer.removeEventListener('wheel', handleWheel);
+            if (scrollContainerActiveMenu) {
+                scrollContainerActiveMenu.removeEventListener('wheel', handleActiveMenuWheel);
+            }
+            if (scrollContainerPlaylist) {
+                scrollContainerPlaylist.removeEventListener('wheel', handleActiveMenuWheel);
             }
         }
 
@@ -136,48 +155,46 @@ function ICodeThis() {
         <div id="bodyDiv" className="bg-black min-h-screen flex justify-center items-center flex-col">
   
             <div className="flex flex-col w-72 h-[85vh] bg-slate-950 shadow-zinc-900 shadow-lg text-stone-300" id="container">
-                <div className='w-full h-[12%] font-bold text-2xl  flex items-center pl-4 text-stone-200' id="pageTitle">
+                <div className='w-full h-[12%] font-bold text-2xl flex items-center pl-4 text-stone-200' id="pageTitle">
                     {activeMenu === 'Home' && ( activeMenu ) }
                     {activeMenu === 'Trending' && ( activeMenu ) }
                     {activeMenu === 'Browse' && ( activeMenu ) }
                     {activeMenu === 'Library' && ( activeMenu ) }
                 </div>
-                <div className='w-full h-[8%] whitespace-nowrap overflow-hidden hover:overflow-scroll flex items-center ' style={{ scrollBehavior: 'smooth'}} id="playlists" ref={scrollContainerActiveMenuRef}>
+                <div className='w-full h-[8%] border-b border-gray-900 whitespace-nowrap overflow-hidden hover:overflow-scroll flex items-center ' style={{ scrollBehavior: 'smooth'}} id="playlists" ref={scrollContainerActiveMenuRef}>
                     {playlistsMenu.map((playList, index: number) => (
-                        //<Link href="#" key={playList}  className={`${activePlaylist === index ? 'font-bold mx-3 text-indigo-400 font-mono underline underline-offset-[7px]' : 'mx-3 hover:text-indigo-500 font-mono  hover:underline hover:underline-offset-[7px]'}`} onClick={() => handlePlayList(index)}>
                         <Link href="#" key={playList}  className={`${activePlaylist === index ? 'font-bold mx-3 text-rose-600 font-mono underline underline-offset-[7px]' : 'mx-3 hover:text-stone-100 font-mono  hover:underline hover:underline-offset-[7px]'}`} onClick={() => handlePlayList(index)}>
                             {playList}
                         </Link>
                     ))}
                 </div>
-                <div className='w-full h-[25%] flex whitespace-nowrap overflow-hidden items-center' style={{ scrollBehavior: 'smooth'}} id="promotedMusic" ref={scrollContainerPromotedRef}>
+                <div className=' w-full h-[35%] lg:h-[25%] flex flex-nowrap overflow-hidden' id="promotedMusic" style={{ scrollBehavior: 'smooth'}} ref={scrollContainerPromotedRef} >
                         {listOfPromoted.map((promotedSong, index: number) => (
-                            <PromotedMusicCards artist={promotedSong.artist} song={promotedSong.song} image={promotedSong.image} specialMsg={promotedSong.specialMsg} key={index} />
+                            <div className='w-[90%] flex-shrink-0' key={index}>
+                                <PromotedMusicCards artist={promotedSong.artist} song={promotedSong.song} image={promotedSong.image} specialMsg={promotedSong.specialMsg} indexNum={index} key={index} />
+                            </div>
                         ))}
                 </div>
                 <div className='w-full h-[45%]' id="songList">
 
                 </div>
-                <div className='w-full h-[10%] flex bg-slate-900' id="bottomMenu">
-                    {/* <nav className='flex'> */}
-                        <button className="w-[25%] h-full justify-center items-center">
-                            <IcT icons="home" classNameCustom='w-[35%] h-full mx-auto'/>
-                            <small>Home</small>
+                <div className='w-full h-[10%] bg-slate-900 leading-tight' id="bottomMenu">
+                        <button className={`w-[25%] h-full hover:bg-slate-800 ${activeMenu === "Home" ? 'text-red-600 font-semibold bg-slate-800' : ''}`} onClick={handleNav('Home')}>
+                            <IcT icons="home" classNameCustom='mx-auto'/>
+                            <small className=''>Home</small>
                         </button>
-                        <button className="w-[25%] h-full">
-                            <IcT icons="flame" classNameCustom='w-[35%] h-full mx-auto'/>
+                        <button className={`w-[25%] h-full hover:bg-slate-800 ${activeMenu === "Trending" ? 'text-red-600 font-semibold bg-slate-800' : ''}`} onClick={handleNav('Trending')}>
+                            <IcT icons="flame" classNameCustom='mx-auto'/>
                             <small>Trending</small>
                         </button>
-                        <button className="w-[25%] h-full">
-                            <IcT icons="search" classNameCustom='w-[35%] h-full mx-auto'/>
+                        <button className={`w-[25%] h-full hover:bg-slate-800 ${activeMenu === "Browse" ? 'text-red-600 font-semibold bg-slate-800' : ''}`} onClick={handleNav('Browse')}>
+                            <IcT icons="search" classNameCustom='mx-auto'/>
                             <small>Browse</small>
                         </button>
-                        <button className="w-[25%] h-full">
-                            <IcT icons="library"classNameCustom='w-[35%] h-full mx-auto'/>
+                        <button className={`w-[25%] h-full hover:bg-slate-800 ${activeMenu === "Library" ? 'text-red-600 font-semibold bg-slate-800' : ''}`} onClick={handleNav('Library')}>
+                            <IcT icons="library"classNameCustom='mx-auto'/>
                             <small>Library</small>
-                        </button>
-                        
-                    {/* </nav> */}
+                        </button> 
                 </div>
 
             </div>
